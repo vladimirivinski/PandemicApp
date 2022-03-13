@@ -40,7 +40,7 @@ public with sharing class CTPersonController {
 			WHERE Id = :personId
 			WITH SECURITY_ENFORCED
 		];
-		if (person == null & person.size() > 0) {
+		if (person != null && person.size() > 0) {
 			return person[0];
 		}
 		return null;

@@ -6,7 +6,7 @@ public with sharing class CTLocationController {
 			SELECT Id, Name, Address__c, Pincode__c, Red_Score__c, Status__c, Status_Update_Date__c
 			FROM Location__c
 			WITH SECURITY_ENFORCED
-			ORDER BY Status_Update_Date__c DESC
+			ORDER BY Status_Update_Date__c DESC NULLS LAST
 			LIMIT 100
 		];
 	}
@@ -33,7 +33,7 @@ public with sharing class CTLocationController {
             WHERE Id = :locationId
             WITH SECURITY_ENFORCED
 		];
-		if (location == null & location.size() > 0) {
+		if (location != null && location.size() > 0) {
 			return location[0];
 		}
 		return null;
