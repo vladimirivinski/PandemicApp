@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Locations_List</fullName>
+    <columns>NAME</columns>
+    <columns>Address__c</columns>
+    <columns>Status__c</columns>
+    <columns>Red_Score__c</columns>
+    <columns>Pincode__c</columns>
+    <columns>LAST_UPDATE</columns>
+    <columns>CREATED_DATE</columns>
+    <columns>OBJECT_ID</columns>
+    <filterScope>Mine</filterScope>
+    <label>Locations List</label>
+</ListView>

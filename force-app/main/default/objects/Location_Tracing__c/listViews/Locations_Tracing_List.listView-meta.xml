@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Locations_Tracing_List</fullName>
+    <columns>NAME</columns>
+    <columns>Location__c</columns>
+    <columns>Person__c</columns>
+    <columns>Visit_Date__c</columns>
+    <columns>LAST_UPDATE</columns>
+    <columns>CREATED_DATE</columns>
+    <columns>OBJECT_ID</columns>
+    <filterScope>Mine</filterScope>
+    <label>Locations Tracing List</label>
+</ListView>
