@@ -6,6 +6,7 @@ public with sharing class CTPersonController {
 		return strHash;
 	}
 
+    //Get List person
 	public static List<Person__c> getRecentHealthChanges() {
 		return [
 			SELECT Id, Name, Mobile__c, Health_Status__c, Status_Update_Date__c, Token__c
@@ -15,7 +16,9 @@ public with sharing class CTPersonController {
 			LIMIT 100
 		];
 	}
-
+    
+    // Search person by name, token, mobile
+    // @return List<Person>
 	public static List<Person__c> searchPeople(String searchTerm) {
 		searchTerm = searchTerm + '%';
 		List<Person__c> matchPeople = [
@@ -28,6 +31,8 @@ public with sharing class CTPersonController {
 		return matchPeople;
 	}
 
+    // Get person by Id
+    // @return Peson
 	public static Person__c getPersonById(String personId) {
 		List<Person__c> person = [
 			SELECT Id, Name, Mobile__c, Health_Status__c, Status_Update_Date__c, Token__c
