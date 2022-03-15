@@ -33,4 +33,25 @@ public with sharing class CTLocationTracingController {
 			WITH SECURITY_ENFORCED
 		];
 	}
+
+	public static List<Location_Tracing__c> checkDuplicates(List<Location_Tracing__c> newLocationTraces) {
+		List<Location_Tracing__c> duplicatedlocationTraces = new List<Location_Tracing__c>();
+		List<Location_Tracing__c> existingLocationTraces = [
+			SELECT Id, Name, Person__c, Location__c, Visit_Date__c
+			FROM Location_Tracing__c
+			WITH SECURITY_ENFORCED
+		];
+		for (Location_Tracing__c exLoc : existingLocationTraces) {
+			for (Location_Tracing__c loc : newLocationTraces) {
+				if (
+					loc.Person__c == exLoc.Person__c &&
+					loc.Location__c == exLoc.Location__c &&
+					loc.Visit_Date__c == exLoc.Visit_Date__c
+				) {
+					duplicatedlocationTraces.add(loc);
+				}
+			}
+		}
+		return duplicatedlocationTraces;
+	}
 }
