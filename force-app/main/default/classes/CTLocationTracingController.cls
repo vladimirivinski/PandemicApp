@@ -20,7 +20,7 @@ public with sharing class CTLocationTracingController {
 		return [
 			SELECT Id, Person__c, Location__c
 			FROM Location_Tracing__c
-			WHERE Visit_Date__c = LAST_N_DAYS:10 AND Person__r.Id IN :personIds
+			WHERE Visit_Date__c = LAST_N_DAYS:10 AND Person__r.Id IN : personIds
 			WITH SECURITY_ENFORCED
 		];
 	}
@@ -35,23 +35,44 @@ public with sharing class CTLocationTracingController {
 	}
 
 	public static List<Location_Tracing__c> checkDuplicates(List<Location_Tracing__c> newLocationTraces) {
-		List<Location_Tracing__c> duplicatedlocationTraces = new List<Location_Tracing__c>();
-		List<Location_Tracing__c> existingLocationTraces = [
-			SELECT Id, Name, Person__c, Location__c, Visit_Date__c
+		//map of location id, set of person ids
+		Map<Id, Set<Id>> mapExistingRecords = new Map<Id, Set<Id>>();
+		// list of duplications
+		List<Location_Tracing__c> duplicates = new List<Location_Tracing__c>();
+
+		Set<Id> locationIds = new Set<Id>();
+		Set<Id> personIds = new Set<Id>();
+
+		for (Location_Tracing__c trace : newLocationTraces) {
+			locationIds.add(trace.Location__c);
+			personIds.add(trace.Person__c);
+		}
+
+		List<Location_Tracing__c> existingRecords = [
+			SELECT Id, Person__c, Location__c
 			FROM Location_Tracing__c
+			WHERE Location__c IN :locationIds AND Person__c IN :personIds
 			WITH SECURITY_ENFORCED
 		];
-		for (Location_Tracing__c exLoc : existingLocationTraces) {
-			for (Location_Tracing__c loc : newLocationTraces) {
+		if (existingRecords != null && existingRecords.size() > 0) {
+			for (Location_Tracing__c trace : existingRecords) {
+				if (!mapExistingRecords.containsKey(trace.Location__c)) {
+					mapExistingRecords.put(trace.Location__c, new Set<Id>());
+				}
+				// add person ids to map set
+				mapExistingRecords.get(trace.Location__c).add(trace.Person__c);
+			}
+			for (Location_Tracing__c trace : newLocationTraces) {
+				// check for location id
+				// if item found in map, check for person in set
 				if (
-					loc.Person__c == exLoc.Person__c &&
-					loc.Location__c == exLoc.Location__c &&
-					loc.Visit_Date__c == exLoc.Visit_Date__c
+					mapExistingRecords.containsKey(trace.Location__c) &&
+					mapExistingRecords.get(trace.Location__c).contains(trace.Person__c)
 				) {
-					duplicatedlocationTraces.add(loc);
+					duplicates.add(trace);
 				}
 			}
 		}
-		return duplicatedlocationTraces;
+		return duplicates;
 	}
 }
