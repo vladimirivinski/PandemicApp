@@ -1,0 +1,19 @@
+<template>
+    <div>
+        <lightning-combobox name="Brand"
+            label="Car Brands"
+            value={brandValue}
+            options={brands}
+            onchange={handleBrandChange} >
+        </lightning-combobox>
+        <p>Selected value is: {brandValue}</p>
+    </div>
+    <div>
+        <lightning-combobox name="Model"
+            label="Car Model"
+            value={modelValue}
+            options={models}
+            onchange={handleModelChange} >
+    </lightning-combobox>
+    </div>
+</template>
