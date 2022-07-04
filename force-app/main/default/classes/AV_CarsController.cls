@@ -51,19 +51,4 @@ public with sharing class AV_CarsController {
         }
     }
 
-        // public class AV_DepWrapper{
-    //     @AuraEnabled
-    //     public String label { get; set; }
-    //     @AuraEnabled
-    //     public String value { get; set; }
-    //     @AuraEnabled
-    //     public List<String> dependency { get; set; }
-
-    //     public AV_Wrapper(String value, String label, List<String> dependency){
-    //         this.label = label;
-    //         this.value = value;
-    //         this.dependency = dependency;
-    //     }
-    // }
-
 }
