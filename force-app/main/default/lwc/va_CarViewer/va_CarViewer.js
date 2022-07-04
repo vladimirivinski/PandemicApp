@@ -1,18 +1,18 @@
-import { LightningElement } from 'lwc';
+import { LightningElement, track } from 'lwc';
 import compareDependentPicklistvalues from "@salesforce/apex/AV_CarsController.compareDependentPicklistvalues";
 
 export default class Va_CarViewer extends LightningElement {
-    brandValue = "Audi";
-    modelValue = "A-3";
-    _brands = [];
-    _models = [];
+    brandValue;
+    modelValue;
+    @track _brands = [];
+    @track _models = [];
 
     //=====================GETTERS========================================
     get brands(){
         return this._brands;
     }
     get models(){
-        return this._models;
+        return select;
     }
     //====================================================================
 
@@ -30,8 +30,10 @@ export default class Va_CarViewer extends LightningElement {
     }
     async getModelInfo(){
         const selected = this._brands.find(e => e.value === this.brandValue);
-        this._models = selected.dependency;
-        console.log('this._models:', this._models);
+        
+        debugger
+        console.log('selected:', selected);
+        
     }
     //====================================================================
 

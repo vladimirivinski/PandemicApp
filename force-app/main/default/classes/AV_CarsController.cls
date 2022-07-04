@@ -21,7 +21,6 @@ public with sharing class AV_CarsController {
      */
     @AuraEnabled
     public static List<AV_DepWrapper> compareDependentPicklistvalues(){
-        List<AV_DepWrapper> res = new List<AV_DepWrapper>();
         List<AV_DepWrapper> brands =  getBrands();
         Map<String, List<Map<String, String>>> models = AV_Utils.getDependentPicklistValues(Car__c.Model__c);
         List<AV_DepWrapper> result = new List<AV_DepWrapper>();
