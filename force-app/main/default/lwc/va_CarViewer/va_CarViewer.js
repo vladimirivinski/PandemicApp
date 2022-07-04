@@ -12,7 +12,11 @@ export default class Va_CarViewer extends LightningElement {
         return this._brands;
     }
     get models(){
+        console.log('this._models:', this._models);
         return this._models;
+    }
+    get isModels() {
+        return Array.isArray(this._models);
     }
     //====================================================================
 

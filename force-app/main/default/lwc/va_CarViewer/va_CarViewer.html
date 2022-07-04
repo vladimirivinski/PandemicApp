@@ -1,19 +1,28 @@
 <template>
-    <div>
-        <lightning-combobox name="Brand"
-            label="Car Brands"
-            value={brandValue}
-            options={brands}
-            onchange={handleBrandChange} >
+    <lightning-card title="Account List using for:each" icon-name="custom:custom63">
+        <div>
+            <lightning-combobox name="Brand"
+                label="Car Brands"
+                value={brandValue}
+                options={brands}
+                onchange={handleBrandChange} >
+            </lightning-combobox>
+            <p>Selected value is: {brandValue}</p>
+        </div>
+        <div>
+            <lightning-combobox name="Model"
+                label="Car Model"
+                value={modelValue}
+                options={models}
+                onchange={handleModelChange} >
         </lightning-combobox>
-        <p>Selected value is: {brandValue}</p>
-    </div>
-    <div>
-        <lightning-combobox name="Model"
-            label="Car Model"
-            value={modelValue}
-            options={models}
-            onchange={handleModelChange} >
-    </lightning-combobox>
-    </div>
+        </div>
+        <div class="slds-m-around_medium">
+            <template if:true={isModels}>
+                <template for:each={models} for:item="mod">
+                    <p key={mod.value}>{mod.label}</p>
+                </template>
+            </template>
+        </div>
+    </lightning-card>
 </template>
