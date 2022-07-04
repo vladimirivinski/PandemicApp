@@ -12,7 +12,7 @@ export default class Va_CarViewer extends LightningElement {
         return this._brands;
     }
     get models(){
-        return _models;
+        return this._models;
     }
     //====================================================================
 
@@ -28,14 +28,15 @@ export default class Va_CarViewer extends LightningElement {
         console.log('this._brands:', this._brands);
     }
     getModelInfo(){
-        
+        const res = this._brands.find(e => e.value === this.brandValue)
+        this._models = res.dependency;
     }
     //====================================================================
 
     //========================HANDLERS====================================
     handleBrandChange(event) {
         this.brandValue = event.detail.value;
-        console.log('this.brandValue:', this.brandValue);
+        this.getModelInfo();
     }
     handleModelChange(event) {
         this.modelValue = event.detail.value;
