@@ -1,0 +1,14 @@
+<template>
+    <lightning-card title="Wire Get Object Info" icon-name="custom:custom67">
+    <div class="slds-m-horizontal_medium">
+        <template if:true={objectInfo.data}>
+                <div class="scroller">
+                    <pre>{objectInfoStr}</pre>
+                </div>
+            </template>
+        </div>
+        <template if:true={objectInfo.error}>
+            Error .Please COntact your Admin .
+        </template>
+    </lightning-card>
+</template>
